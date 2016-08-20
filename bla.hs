@@ -20,7 +20,25 @@ quadLines = concat
   where s = 160
 
 
-lines = quadLines
+triLines = concat
+  [ [ Line (triPoint s x y)
+           (triPoint s (x+1) y)
+    , Line (triPoint s x y)
+           (triPoint s x (y+1))
+    , Line (triPoint s x y)
+           (triPoint s (x+1) (y+1))
+    ]
+  | x <- [0..30], y <- [0..40]
+  ]
+  where s = 160
+
+
+triPoint :: Int -> Int -> Int -> Point Int
+triPoint s x y = (x*s - div (y*s) 2, round $ fromIntegral y*h*fromIntegral s)
+  where h = sqrt(3)/2
+
+
+lines = triLines
 
 
 --- svg stuff ---
